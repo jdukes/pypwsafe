@@ -2,8 +2,13 @@
 /.pydevproject
 /.settings
 /MANIFEST
+/build
+/src/*.egg-info
 /dist
 /python-pypwsafe-0.1
 /Test Script.py
 /_gsdata_
 /.externalToolBuilders
+*.pyc
+*.pyo
+.*.swp
