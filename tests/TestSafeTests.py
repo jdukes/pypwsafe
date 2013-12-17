@@ -28,6 +28,22 @@ from shutil import rmtree, copyfile
 # Password to decrypt all test safes
 STANDARD_TEST_SAFE_PASSWORD = 'bogus12345'
 
+def get_test_safe(testSafe, safeDir):
+    ''' Copies test safe to temp location '''
+
+    assert testSafe
+    assert safeDir
+
+    safeLoc = os.path.join('..', 'test_safes', testSafe)
+    assert os.access(safeLoc, os.R_OK)
+
+    # Copy the safe
+    ourTestSafe = os.path.join(safeDir, os.path.basename(testSafe))
+
+    copyfile(safeLoc, ourTestSafe)
+
+    return ourTestSafe
+
 class TestSafeTestBase(unittest.TestCase):
     # Should be overridden with a test safe file name. The path should be relative to the test_safes directory.
     # All test safes must have the standard password (see above) 
@@ -38,21 +54,14 @@ class TestSafeTestBase(unittest.TestCase):
     autoOpenMode = "RO"
     
     def setUp(self):        
-        assert self.testSafe
-        
-        self.safeLoc = os.path.join("../test_safes", self.testSafe)
-        assert os.access(self.safeLoc, os.R_OK)
-        
-        # Make a temp dir and make a copy
+
+        # Make a temp dir
         self.safeDir = mkdtemp(prefix = "safe_test_%s" % type(self).__name__)
-        
-        # COpy the safe
-        self.ourTestSafe = os.path.join(
-                                        self.safeDir,
-                                        os.path.basename(self.testSafe),
-                                        )
-        copyfile(self.safeLoc, self.ourTestSafe)
-        
+
+        assert self.testSafe
+
+        self.ourTestSafe = get_test_safe(self.testSafe, self.safeDir)
+
         from pypwsafe import PWSafe3
         if self.autoOpenSafe:
             self.testSafeO = PWSafe3(
