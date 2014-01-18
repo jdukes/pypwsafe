@@ -23,10 +23,8 @@ Created on Jan 19, 2013
 @license: GPLv2
 @version: 0.1
 '''
-import unittest
-import os, os.path, sys
 
-from TestSafeTests import TestSafeTestBase, STANDARD_TEST_SAFE_PASSWORD
+from TestSafeTests import TestSafeTestBase
 
 
 class RecentEntriesTest_DBLevel(TestSafeTestBase):
