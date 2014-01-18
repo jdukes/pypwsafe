@@ -23,10 +23,14 @@
 """
 import unittest
 import os, os.path, sys
+from os.path import abspath, dirname
+from os.path import join as pathjoin
 from tempfile import mkdtemp
 from shutil import rmtree, copyfile
 # Password to decrypt all test safes
 STANDARD_TEST_SAFE_PASSWORD = 'bogus12345'
+
+SAFE_SOURCE = pathjoin(dirname(dirname(abspath(__file__))), 'test_safes')
 
 def get_test_safe(testSafe, safeDir):
     ''' Copies test safe to temp location '''
@@ -34,7 +38,7 @@ def get_test_safe(testSafe, safeDir):
     assert testSafe
     assert safeDir
 
-    safeLoc = os.path.join('..', 'test_safes', testSafe)
+    safeLoc = pathjoin(SAFE_SOURCE, testSafe)
     assert os.access(safeLoc, os.R_OK)
 
     # Copy the safe
