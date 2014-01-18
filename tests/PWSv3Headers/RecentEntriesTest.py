@@ -13,7 +13,8 @@
 #    GNU General Public License for more details.
 #
 #    You should have received a copy of the GNU General Public License
-#    along with PyPWSafe.  If not, see http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+#    along with PyPWSafe.  If not, see
+#    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 #===============================================================================
 ''' Test named and unnamed password policies
 Created on Jan 19, 2013
@@ -29,8 +30,9 @@ from TestSafeTests import TestSafeTestBase, STANDARD_TEST_SAFE_PASSWORD
 
 
 class RecentEntriesTest_DBLevel(TestSafeTestBase):
-    # Should be overridden with a test safe file name. The path should be relative to the test_safes directory.
-    # All test safes must have the standard password (see above) 
+    # Should be overridden with a test safe file name. The path should be
+    # relative to the test_safes directory.
+    # All test safes must have the standard password (see above)
     testSafe = 'RecentEntriesTest.psafe3'
     # Automatically open safes
     autoOpenSafe = False
@@ -52,8 +54,9 @@ class RecentEntriesTest_DBLevel(TestSafeTestBase):
 
 
 class RecentEntriesTest_RecordLevel(TestSafeTestBase):
-    # Should be overridden with a test safe file name. The path should be relative to the test_safes directory.
-    # All test safes must have the standard password (see above) 
+    # Should be overridden with a test safe file name. The path should be
+    # relative to the test_safes directory.
+    # All test safes must have the standard password (see above)
     testSafe = 'RecentEntriesTest.psafe3'
     # Automatically open safes
     autoOpenSafe = True
@@ -64,8 +67,3 @@ class RecentEntriesTest_RecordLevel(TestSafeTestBase):
         from uuid import UUID
         for entry in self.testSafeO.getDbRecentEntries():
             self.assertTrue(type(entry) == UUID, "Expected a UUID")
-    
-    
-    
-# FIXME: Add save test
-

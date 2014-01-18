@@ -12,10 +12,11 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
-#    along with PyPWSafe.  If not, see http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+#    You should have received a copy of the GNU General Public License along
+#    with PyPWSafe.  If not, see
+#    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 #===============================================================================
-""" Test the pypwsafe API - Provides tests based on the different test safes. 
+""" Test the pypwsafe API - Provides tests based on the different test safes.
 
 @author: Paulson McIntyre (GpMidi) <paul@gpmidi.net>
 @license: GPLv2
@@ -49,15 +50,18 @@ def get_sample_safe(testSafe, safeDir):
     return ourTestSafe
 
 class TestSafeTestBase(unittest.TestCase):
-    # Should be overridden with a test safe file name. The path should be relative to the test_safes directory.
-    # All test safes must have the standard password (see above) 
+    """Base class for most tests; provides common setup and teardown when
+    testing a single safe file."""
+    # Should be overridden with a test safe file name. The path should be
+    # relative to the test_safes directory.  All test safes must have the
+    # standard password (see above).
     testSafe = None
     # Automatically open safes
     autoOpenSafe = True
     # How to open the safe
     autoOpenMode = "RO"
-    
-    def setUp(self):        
+
+    def setUp(self):
 
         # Make a temp dir
         self.safeDir = mkdtemp(prefix = "safe_test_%s" % type(self).__name__)
@@ -75,7 +79,7 @@ class TestSafeTestBase(unittest.TestCase):
                                      )
         else:
             self.testSafeO = None
-        
+
     def tearDown(self):
         try:
             rmtree(self.safeDir)

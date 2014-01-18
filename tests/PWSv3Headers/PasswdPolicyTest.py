@@ -13,7 +13,8 @@
 #    GNU General Public License for more details.
 #
 #    You should have received a copy of the GNU General Public License
-#    along with PyPWSafe.  If not, see http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+#    along with PyPWSafe.  If not, see
+#    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 #===============================================================================
 ''' Test named and unnamed password policies
 Created on Jan 19, 2013
@@ -29,8 +30,9 @@ from TestSafeTests import TestSafeTestBase, STANDARD_TEST_SAFE_PASSWORD
 
 
 class NamedPolicyTest_DBLevel(TestSafeTestBase):
-    # Should be overridden with a test safe file name. The path should be relative to the test_safes directory.
-    # All test safes must have the standard password (see above) 
+    # Should be overridden with a test safe file name. The path should be
+    # relative to the test_safes directory.
+    # All test safes must have the standard password (see above)
     testSafe = 'passwordPolicyTest.psafe3'
     # Automatically open safes
     autoOpenSafe = False
@@ -52,14 +54,15 @@ class NamedPolicyTest_DBLevel(TestSafeTestBase):
 
 
 class NamedPolicyTest_RecordLevel(TestSafeTestBase):
-    # Should be overridden with a test safe file name. The path should be relative to the test_safes directory.
-    # All test safes must have the standard password (see above) 
+    # Should be overridden with a test safe file name. The path should be
+    # relative to the test_safes directory.
+    # All test safes must have the standard password (see above)
     testSafe = 'passwordPolicyTest.psafe3'
     # Automatically open safes
     autoOpenSafe = True
     # How to open the safe
     autoOpenMode = "RO"
-    
+
     FIXED_POLICIES = {
                       "Policy 1":{
                                   'useLowercase':True,
@@ -74,7 +77,8 @@ class NamedPolicyTest_RecordLevel(TestSafeTestBase):
                                   'minUppercaseCharCount':2,
                                   'minDigitCount':1,
                                   'minSpecialCharCount':0,
-                                  'allowedSpecialSymbols':"+-=_@#$%^&;:,.<>/~\\[](){}?!|",
+                                  'allowedSpecialSymbols':
+                                    "+-=_@#$%^&;:,.<>/~\\[](){}?!|",
                                   },
                       "Policy Hex":{
                                   'useLowercase':False,
@@ -89,7 +93,8 @@ class NamedPolicyTest_RecordLevel(TestSafeTestBase):
                                   'minUppercaseCharCount':1,
                                   'minDigitCount':1,
                                   'minSpecialCharCount':1,
-                                  'allowedSpecialSymbols':"+-=_@#$%^&;:,.<>/~\\[](){}?!|",
+                                  'allowedSpecialSymbols':
+                                    "+-=_@#$%^&;:,.<>/~\\[](){}?!|",
                                   },
                       "Policy Long":{
                                   'useLowercase':True,
@@ -112,8 +117,8 @@ class NamedPolicyTest_RecordLevel(TestSafeTestBase):
         for policy in self.testSafeO.getDbPolicies():
             if policy['name'] in self.FIXED_POLICIES:
                 for k, v in self.FIXED_POLICIES[policy['name']].items():
-                    self.assertTrue(k in policy, "%r: Expected %r to be in %r" % (policy['name'], k, policy))
-                    self.assertEqual(policy[k], v, "%r: Expected %r from %r to equal %r" % (policy['name'], policy[k], k, v))
-   
-# FIXME: Add save test
-
+                    self.assertTrue(k in policy, "%r: Expected %r to be in %r"
+                            % (policy['name'], k, policy))
+                    self.assertEqual(policy[k], v,
+                            "%r: Expected %r from %r to equal %r"
+                                % (policy['name'], policy[k], k, v))

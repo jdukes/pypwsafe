@@ -13,7 +13,8 @@
 #    GNU General Public License for more details.
 #
 #    You should have received a copy of the GNU General Public License
-#    along with PyPWSafe.  If not, see http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+#    along with PyPWSafe.  If not, see
+#    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 #===============================================================================
 ''' Test the version fields
 Created on Jan 19, 2013
@@ -29,8 +30,9 @@ from TestSafeTests import TestSafeTestBase, STANDARD_TEST_SAFE_PASSWORD
 
 
 class VersionTest_DBLevel(TestSafeTestBase):
-    # Should be overridden with a test safe file name. The path should be relative to the test_safes directory.
-    # All test safes must have the standard password (see above) 
+    # Should be overridden with a test safe file name. The path should be
+    # relative to the test_safes directory.
+    # All test safes must have the standard password (see above)
     testSafe = 'VersionTest.psafe3'
     # Automatically open safes
     autoOpenSafe = False
@@ -52,26 +54,27 @@ class VersionTest_DBLevel(TestSafeTestBase):
 
 
 class VersionTest_RecordLevel(TestSafeTestBase):
-    # Should be overridden with a test safe file name. The path should be relative to the test_safes directory.
-    # All test safes must have the standard password (see above) 
+    # Should be overridden with a test safe file name. The path should be
+    # relative to the test_safes directory.
+    # All test safes must have the standard password (see above)
     testSafe = 'VersionTest.psafe3'
     # Automatically open safes
     autoOpenSafe = True
     # How to open the safe
     autoOpenMode = "RW"
-    
+
     def test_read(self):
-        self.assertTrue(self.testSafeO.getVersion() is None, "Given safe shouldn't have a version")
-        # self.assertTrue(self.testSafeO.getVersionPretty(), "Couldn't get the pretty version")
-    
+        self.assertTrue(self.testSafeO.getVersion() is None,
+                "Given safe shouldn't have a version")
+        # self.assertTrue(self.testSafeO.getVersionPretty(), "Couldn't get the
+        # pretty version")
+
     def test_pretty_write(self):
         self.testSafeO.setVersionPretty(version = "PasswordSafe V3.28")
         self.testSafeO.save()
-        self.assertTrue(self.testSafeO.getVersion() == 0x030A, "Pretty version set resulted in the wrong version ID")
-    
-    def test_bad_pretty_value(self):
-        self.assertRaises(ValueError, self.testSafeO.setVersionPretty, version = "Bogus version")
-        
-        
-# FIXME: Add save test
+        self.assertTrue(self.testSafeO.getVersion() == 0x030A,
+                "Pretty version set resulted in the wrong version ID")
 
+    def test_bad_pretty_value(self):
+        self.assertRaises(ValueError, self.testSafeO.setVersionPretty,
+                version = "Bogus version")
