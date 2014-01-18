@@ -39,17 +39,8 @@ class NamedPolicyTest_DBLevel(TestSafeTestBase):
     # How to open the safe
     autoOpenMode = "RO"
 
-    def _openSafe(self):
-        from pypwsafe import PWSafe3
-        self.testSafeO = PWSafe3(
-                                 filename = self.ourTestSafe,
-                                 password = STANDARD_TEST_SAFE_PASSWORD,
-                                 mode = self.autoOpenMode,
-                                 )
-
     def test_open(self):
-        self.testSafeO = None
-        self._openSafe()
+        self.testSafeO = self.open_safe()
         self.assertTrue(self.testSafeO, "Failed to open the test safe")
 
 

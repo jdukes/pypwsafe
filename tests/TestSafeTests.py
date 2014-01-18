@@ -70,13 +70,8 @@ class TestSafeTestBase(unittest.TestCase):
 
         self.ourTestSafe = get_sample_safe(self.testSafe, self.safeDir)
 
-        from pypwsafe import PWSafe3
         if self.autoOpenSafe:
-            self.testSafeO = PWSafe3(
-                                     filename = self.ourTestSafe,
-                                     password = STANDARD_TEST_SAFE_PASSWORD,
-                                     mode = self.autoOpenMode,
-                                     )
+            self.testSafeO = self.open_safe()
         else:
             self.testSafeO = None
 
@@ -85,3 +80,14 @@ class TestSafeTestBase(unittest.TestCase):
             rmtree(self.safeDir)
         except:
             pass
+
+    def open_safe(self, safe_file=None, mode=None,
+                password=STANDARD_TEST_SAFE_PASSWORD):
+
+        if not safe_file:
+            safe_file = self.ourTestSafe
+        if not mode:
+            mode = self.autoOpenMode
+
+        from pypwsafe import PWSafe3
+        return PWSafe3(safe_file, password, mode)
