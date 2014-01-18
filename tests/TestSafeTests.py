@@ -32,7 +32,7 @@ STANDARD_TEST_SAFE_PASSWORD = 'bogus12345'
 
 SAFE_SOURCE = pathjoin(dirname(dirname(abspath(__file__))), 'test_safes')
 
-def get_test_safe(testSafe, safeDir):
+def get_sample_safe(testSafe, safeDir):
     ''' Copies test safe to temp location '''
 
     assert testSafe
@@ -64,7 +64,7 @@ class TestSafeTestBase(unittest.TestCase):
 
         assert self.testSafe
 
-        self.ourTestSafe = get_test_safe(self.testSafe, self.safeDir)
+        self.ourTestSafe = get_sample_safe(self.testSafe, self.safeDir)
 
         from pypwsafe import PWSafe3
         if self.autoOpenSafe:
