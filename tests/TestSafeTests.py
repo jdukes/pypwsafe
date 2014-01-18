@@ -24,7 +24,7 @@
 """
 import unittest
 import os, os.path, sys
-from os.path import abspath, dirname
+from os.path import abspath, basename, dirname
 from os.path import join as pathjoin
 from tempfile import mkdtemp
 from shutil import rmtree, copyfile
@@ -33,21 +33,6 @@ STANDARD_TEST_SAFE_PASSWORD = 'bogus12345'
 
 SAFE_SOURCE = pathjoin(dirname(dirname(abspath(__file__))), 'test_safes')
 
-def get_sample_safe(testSafe, safeDir):
-    ''' Copies test safe to temp location '''
-
-    assert testSafe
-    assert safeDir
-
-    safeLoc = pathjoin(SAFE_SOURCE, testSafe)
-    assert os.access(safeLoc, os.R_OK)
-
-    # Copy the safe
-    ourTestSafe = os.path.join(safeDir, os.path.basename(testSafe))
-
-    copyfile(safeLoc, ourTestSafe)
-
-    return ourTestSafe
 
 class TestSafeTestBase(unittest.TestCase):
     """Base class for most tests; provides common setup and teardown when
@@ -68,7 +53,7 @@ class TestSafeTestBase(unittest.TestCase):
 
         assert self.testSafe
 
-        self.ourTestSafe = get_sample_safe(self.testSafe, self.safeDir)
+        self.ourTestSafe = self.get_sample_safe(self.testSafe, self.safeDir)
 
         if self.autoOpenSafe:
             self.testSafeO = self.open_safe()
@@ -91,3 +76,19 @@ class TestSafeTestBase(unittest.TestCase):
 
         from pypwsafe import PWSafe3
         return PWSafe3(safe_file, password, mode)
+
+    def get_sample_safe(self, testSafe, safeDir):
+        ''' Builds path and copies test safe to temp location '''
+
+        assert testSafe
+        assert safeDir
+
+        safeLoc = pathjoin(SAFE_SOURCE, testSafe)
+        assert os.access(safeLoc, os.R_OK)
+
+        # Copy the safe
+        ourTestSafe = pathjoin(safeDir, basename(testSafe))
+
+        copyfile(safeLoc, ourTestSafe)
+
+        return ourTestSafe
