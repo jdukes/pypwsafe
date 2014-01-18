@@ -49,7 +49,7 @@ class TestSafeTestBase(unittest.TestCase):
     def setUp(self):
 
         # Make a temp dir
-        self.safeDir = mkdtemp(prefix = "safe_test_%s" % type(self).__name__)
+        self.safeDir = self.get_temp_dir()
 
         assert self.testSafe
 
@@ -92,3 +92,9 @@ class TestSafeTestBase(unittest.TestCase):
         copyfile(safeLoc, ourTestSafe)
 
         return ourTestSafe
+
+    def get_temp_dir(self):
+        """Wrap creation of temp directory."""
+        if not getattr(self, '_temp_dir', None):
+            self._temp_dir = mkdtemp(prefix = "safe_test_%s" % type(self).__name__)
+        return self._temp_dir
