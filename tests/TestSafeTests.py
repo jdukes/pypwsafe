@@ -51,14 +51,14 @@ class TestSafeTestBase(unittest.TestCase):
         # Make a temp dir
         self.safeDir = self.get_temp_dir()
 
-        assert self.testSafe
+        if self.testSafe:
+            # Copy the requested safe to a temp dir
+            self.ourTestSafe = self.get_sample_safe(self.testSafe, self.safeDir)
 
-        self.ourTestSafe = self.get_sample_safe(self.testSafe, self.safeDir)
-
-        if self.autoOpenSafe:
-            self.testSafeO = self.open_safe()
-        else:
-            self.testSafeO = None
+            if self.autoOpenSafe:
+                self.testSafeO = self.open_safe()
+            else:
+                self.testSafeO = None
 
     def tearDown(self):
         try:
@@ -68,6 +68,8 @@ class TestSafeTestBase(unittest.TestCase):
 
     def open_safe(self, safe_file=None, mode=None,
                 password=STANDARD_TEST_SAFE_PASSWORD):
+        """Open a safe file (optionally using class defaults) and return a
+        PWSafe3 object."""
 
         if not safe_file:
             safe_file = self.ourTestSafe
