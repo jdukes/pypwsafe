@@ -60,6 +60,7 @@ class LastSaveUserTest_RecordLevel(TestSafeTestBase):
 
     def test_new(self):
         found = self.testSafeO.getLastSaveUserNew()
+        self.assertTrue(found, "Found a new username")
 
     def test_old(self):
         found = self.testSafeO.getLastSaveUserOld()
