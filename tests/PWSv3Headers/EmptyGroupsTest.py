@@ -30,14 +30,8 @@ from TestSafeTests import TestSafeTestBase, STANDARD_TEST_SAFE_PASSWORD
 
 
 class EmptyGroupTest_DBLevel(TestSafeTestBase):
-    # Should be overridden with a test safe file name. The path should be
-    # relative to the test_safes directory.
-    # All test safes must have the standard password (see above)
     testSafe = 'EmptyGroupTest.psafe3'
-    # Automatically open safes
     autoOpenSafe = False
-    # How to open the safe
-    autoOpenMode = "RO"
 
     def test_open(self):
         self.testSafeO = self.open_safe()
@@ -45,14 +39,7 @@ class EmptyGroupTest_DBLevel(TestSafeTestBase):
 
 
 class EmptyGroupTest_RecordLevel(TestSafeTestBase):
-    # Should be overridden with a test safe file name. The path should be
-    # relative to the test_safes directory.
-    # All test safes must have the standard password (see above)
     testSafe = 'EmptyGroupTest.psafe3'
-    # Automatically open safes
-    autoOpenSafe = True
-    # How to open the safe
-    autoOpenMode = "RO"
 
     def test_hasEmptyGroups(self):
         self.assertTrue('asdf' in self.testSafeO.getEmptyGroups(),
