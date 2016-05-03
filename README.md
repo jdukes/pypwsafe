@@ -58,7 +58,7 @@ The pyCrypto library doesn't support TwoFish, which is a newer cipher based on B
 ### Where can I find details on the Password Safe file format?
 The format spec is kept in the Password Safe project's SVN repo. Go 
 to the password safe code base and check in /pwsafe/pwsafe/docs/formatV3.txt.
-As of today, it can be found [here](http://sourceforge.net/p/passwordsafe/code/5210/tree/trunk/pwsafe/pwsafe/docs/) 
+As of today, it can be found [here](https://sourceforge.net/p/passwordsafe/git-code/ci/master/tree/docs/formatV3.txt) 
 	
 TODO
 ====
